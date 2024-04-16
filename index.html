@@ -1,1 +1,120 @@
-test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Card</title>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.card-container {
+  width: 80%;
+  max-width: 400px;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  padding-top: 150%; /* 1:1.5 aspect ratio */
+  background-color: #ffffff;
+  border-radius: 20px; /* Rounded corners */
+  overflow: hidden; /* Hide overflow content */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* Add shadow */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+.card-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.card-content h2 {
+  margin: 0;
+  color: #333;
+}
+
+.card-content p {
+  margin: 10px 0 0;
+  color: #666;
+  /* Allow text to wrap */
+  word-wrap: break-word;
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: none; /* Make the notification non-clickable */
+}
+
+.show {
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+<div class="card-container">
+  <div class="card" id="card">
+    <div class="card-content" id="content">
+      <h2>Loading...</h2>
+    </div>
+  </div>
+</div>
+<div class="notification" id="notification">已经是最后一个点子了!</div>
+
+<script>
+const projects = [
+  { title: "Project 1", description: "Project 1 description goes here... This is a long description that will wrap to the next line if it exceeds the width of the card." },
+  { title: "Project 2", description: "Project 2 description goes here... This is another long description that will wrap to the next line if it exceeds the width of the card." },
+  { title: "Project 3", description: "Project 3 description goes here... This is yet another long description that will wrap to the next line if it exceeds the width of the card." },
+  // Add more projects as needed
+];
+
+let currentIndex = -1;
+const cardContent = document.getElementById("content");
+const card = document.getElementById("card");
+const notification = document.getElementById("notification");
+
+function showNextProject() {
+  currentIndex = (currentIndex + 1) % projects.length;
+  const project = projects[currentIndex];
+  cardContent.innerHTML = `
+    <h2>${project.title}</h2>
+    <p>${project.description}</p>
+  `;
+
+  if (currentIndex === projects.length - 1) {
+    notification.classList.add("show");
+    setTimeout(() => {
+      notification.classList.remove("show");
+    }, 3000);
+  }
+}
+
+// Show the first project when the page loads
+showNextProject();
+
+card.addEventListener("click", showNextProject);
+</script>
+</body>
+</html>
+
