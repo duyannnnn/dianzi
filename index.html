@@ -16,15 +16,15 @@ body {
 }
 
 .card-container {
-  width: 80%;
-  max-width: 400px;
+  width: 90%; /* Adjusted to be slightly larger */
+  max-width: 500px; /* Adjusted to be slightly larger */
 }
 
 .card {
   position: relative;
   width: 100%;
-  padding-top: 150%; /* 1:1.5 aspect ratio */
-  background-color: #ffffff;
+  padding-top: 160%; /* Increased to make the card taller */
+  background-color: #f9fafb; /* Light gray */
   border-radius: 20px; /* Rounded corners */
   overflow: hidden; /* Hide overflow content */
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* Add shadow */
@@ -42,18 +42,20 @@ body {
 .card-content h2 {
   margin: 0;
   color: #333;
+  font-size: 30px; /* Increased font size */
 }
 
 .card-content p {
   margin: 10px 0 0;
   color: #666;
+  font-size: 24px; /* Increased font size */
   /* Allow text to wrap */
   word-wrap: break-word;
 }
 
 .notification {
   position: fixed;
-  top: 20px;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
   background-color: rgba(0, 0, 0, 0.8);
